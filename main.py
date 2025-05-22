@@ -10,12 +10,12 @@ def deletesong():
     global queue
     global deletee
     numb= int(deletee.get())
-    sortedq = sorted(queue.keys())
-    queue.pop(sortedq[numb-1])
+    queue.pop(list(queue.keys())[numb-1])
 
 def timenow():
     global sound
     global filelist
+    global queue
     data = datetime.strftime(datetime.now(),"%H%M%S")
     currtime= int(data[0:2])*3600+int(data[2:4])*60+int(data[4:])
     try:
@@ -24,9 +24,9 @@ def timenow():
     except:
         pass
     currqueue = []
-    sortedq = dict(sorted(queue.items(), key=lambda x: x[0]))
+    queue = dict(sorted(queue.items(), key=lambda x: x[0]))
     numb = 1
-    for secs,path,time in sortedq.values():
+    for secs,path,time in queue.values():
         currqueue.append(f"{numb} : {path} {time}")
         numb+=1
     try:
